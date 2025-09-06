@@ -1,12 +1,20 @@
 {% extends "base.html" %}
 
+{% load django_bootstrap5 %}
+
 {% block content %}
-  <form>
-    <table>
-      {{ form }}    <!-- {{ form.as_p }} тогда каждое поле будет обёрнуто в <p> -->
-    </table>
-    <input type="submit" value="Submit">
-  </form>
+  <div class="card col-4">
+    <div class="card-header">
+      Калькулятор ожидания дня рождения
+    </div>
+    <div class="card-body">
+      <form>
+        {% bootstrap_form form %} <!-- Выводим поля формы с помощью специального тега. -->
+    <!-- Добавляем кнопку отправки данных. -->
+        {% bootstrap_button button_type="submit" content="Отправить" %}
+      </form>
+    </div>
+  </div>
   {% with data=request.GET %}   <!-- Присваиваем переменной data объект request.GET -->
     <!--{% if data %}    В дальнейшем используем имя data вместо request.GET {% endif %}-->
     {% if form.is_valid %}
