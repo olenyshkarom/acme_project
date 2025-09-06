@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+  <form>
+    <table>
+      {{ form }}    <!-- {{ form.as_p }} тогда каждое поле будет обёрнуто в <p> -->
+    </table>
+    <input type="submit" value="Submit">
+  </form>
+  {% with data=request.GET %}   <!-- Присваиваем переменной data объект request.GET -->
+    <!--{% if data %}    В дальнейшем используем имя data вместо request.GET {% endif %}-->
+    {% if form.is_valid %}
+      <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
+      {% if birthday_countdown == 0 %}
+        С днём рождения!
+      {% else %}
+        Осталось дней до дня рождения: {{ birthday_countdown }}!
+      {% endif %}
+    {% endif %}
+  {% endwith %} <!-- Когда заканчивается область шаблона, где нужна переменная, закрываем тег with -->
 {% endblock %}
+
+
+<!--
+Либо так: 
+{% with data=request.GET %}
+  ...
+{% endwith %}
+
+ Либо так 
+  (это старый синтаксис, но он тоже поддерживается): 
+{% with request.GET as data %}
+  ...
+{% endwith %} 
+-->
