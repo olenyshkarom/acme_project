@@ -8,11 +8,12 @@ from .utils import calculate_birthday_countdown
 
 
 def birthday(request):
-    form = BirthdayForm(request.GET or None)    # если же объект request.GET пуст — срабатывает условиe or и форма создаётся без параметров
+    form = BirthdayForm(request.POST or None)    # если же объект request.GET пуст — срабатывает условиe or и форма создаётся без параметров
     # Создаём словарь контекста сразу после инициализации формы.
     context = {'form': form}
 
     if form.is_valid():
+        form.save()
         birthday_countdown = calculate_birthday_countdown(
             form.cleaned_data['birthday']   # 3 урок обработка данных
         )

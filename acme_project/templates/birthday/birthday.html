@@ -8,14 +8,15 @@
       Калькулятор ожидания дня рождения
     </div>
     <div class="card-body">
-      <form>
+      <form method="post">
+        {% csrf_token %}
         {% bootstrap_form form %} <!-- Выводим поля формы с помощью специального тега. -->
     <!-- Добавляем кнопку отправки данных. -->
         {% bootstrap_button button_type="submit" content="Отправить" %}
       </form>
     </div>
   </div>
-  {% with data=request.GET %}   <!-- Присваиваем переменной data объект request.GET -->
+  {% with data=request.POST %}   <!-- Присваиваем переменной data объект request.GET -->
     <!--{% if data %}    В дальнейшем используем имя data вместо request.GET {% endif %}-->
     {% if form.is_valid %}
       <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
