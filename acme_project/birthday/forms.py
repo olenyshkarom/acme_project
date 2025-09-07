@@ -12,7 +12,7 @@ class BirthdayForm(forms.ModelForm):
 
         # для поля с датой рождения используется виджет с типом данных date.
         widgets = {
-            'birthday': forms.DateInput(attrs={'type': 'date'})    # Виджеты полей описываются в подклассе Meta:
+            'birthday': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'})    # Виджеты полей описываются в подклассе Meta:
         }
 
 # IntegerField для целочисленных полей,
@@ -32,19 +32,5 @@ class BirthdayForm(forms.ModelForm):
 #         widget=forms.DateInput(attrs={'type': 'date'})
 #     )
 
-class ContestForm(forms.Form):
-    title = forms.CharField(label='Название', max_length=20)
-    description = forms.CharField(
-        label='Описание',
-        widget=forms.Textarea({'cols': '22', 'rows': '5'}),
-    )
-    price = forms.IntegerField(
-        label='Цена',
-        min_value=10, max_value=100,
-        help_text='Рекомендованная розничная цена',
-    )
-    comment = forms.CharField(
-        label='Комментарий',
-        required=False,
-        widget=forms.Textarea({'cols': '22', 'rows': '5'}),
-    )
+# Можно поправить формат и без изменения локализации USE_L10N: для этого нужно
+# переопределить формат даты на уровне виджета, используя параметр input_formats=['%Y-%m-%d']. тут работало только так format='%Y-%m-%d'
