@@ -16,9 +16,10 @@
       </form>
     </div>
   </div>
-  {% with data=request.POST %}   <!-- Присваиваем переменной data объект request.GET -->
-    <!--{% if data %}    В дальнейшем используем имя data вместо request.GET {% endif %}-->
+  {% with data=form.instance %}
     {% if form.is_valid %}
+      ID записи в БД: {{ data.id }}
+      <hr>
       <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
       {% if birthday_countdown == 0 %}
         С днём рождения!
