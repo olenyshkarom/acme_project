@@ -7,12 +7,14 @@ from .forms import BirthdayForm
 from .models import Birthday
 
 # Импортируем из utils.py функцию для подсчёта дней.
-# from .utils import calculate_birthday_countdown
+from .utils import calculate_birthday_countdown
 
 # Импортируем класс пагинатора.
 # from django.core.paginator import Paginator
 
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import (
+    CreateView, DeleteView, DetailView, ListView, UpdateView
+)
 from django.urls import reverse_lazy
 
 
@@ -193,3 +195,15 @@ class BirthdayDeleteView(BirthdayMixin, DeleteView):
 #         return redirect('birthday:list')
 #     # Если был получен GET-запрос — отображаем форму.
 #     return render(request, 'birthday/birthday.html', context)
+
+
+class BirthdayDetailView(DetailView):
+    model = Birthday
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)  # Получаем словарь контекста:
+        # Добавляем в словарь новый ключ:
+        context['birthday_countdown'] = calculate_birthday_countdown(
+            self.object.birthday    # Дату рождения берём из объекта в словаре context:
+        )
+        return context  # Возвращаем словарь контекста.

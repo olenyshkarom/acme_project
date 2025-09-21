@@ -10,6 +10,7 @@ urlpatterns = [
     # path('list/', views.birthday_list, name='list'),
     path('list/', views.BirthdayListView.as_view(), name='list'),   # Этот метод есть у всех встроенных CBV
     # наследники класса ListView ищут шаблон <название приложения>/<название модели>_list.html;
+    path('<int:pk>/', views.BirthdayDetailView.as_view(), name='detail'),
     # path('<int:pk>/edit/', views.birthday, name='edit'),
     path('<int:pk>/edit/', views.BirthdayUpdateView.as_view(), name='edit'),
     # path('<int:pk>/delete/', views.delete_birthday, name='delete'),
