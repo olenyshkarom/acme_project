@@ -12,7 +12,7 @@ urlpatterns = [
     # Подключаем urls.py приложения для работы с пользователями.
     path('auth/', include('django.contrib.auth.urls')),
     # В конце добавляем к списку вызов функции static.
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # исключительно для этапа разработки
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # исключительно для этапа разработки
 
 # Этот способ будет работать только в режиме разработки (когда проект запускается командой python manage.py runserver) и при настройке DEBUG = True в settings.py. 
 # потом заменить на DEBUG = False

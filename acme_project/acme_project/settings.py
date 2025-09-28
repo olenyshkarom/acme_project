@@ -102,3 +102,5 @@ EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 # но В модуле аутентификации отправка писем настроена по умолчанию
 # После логина будем перенаправлять пользователя на главную страницу — homepage.
 LOGIN_REDIRECT_URL = 'pages:homepage'
+
+LOGIN_URL = 'login'  # Адрес страницы логина
