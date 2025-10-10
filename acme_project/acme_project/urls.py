@@ -30,3 +30,5 @@ urlpatterns = [
 
 # Этот способ будет работать только в режиме разработки (когда проект запускается командой python manage.py runserver) и при настройке DEBUG = True в settings.py. 
 # потом заменить на DEBUG = False
+
+handler404 = 'core.views.page_not_found'

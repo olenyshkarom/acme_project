@@ -1,10 +1,14 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Импортируется функция-валидатор.
 from .validators import real_age
 
 # Импортируем функцию reverse() для получения ссылки на объект.
 from django.urls import reverse
+
+# Да, именно так всегда и ссылаемся на модель пользователя!
+User = get_user_model()
 
 
 class Birthday(models.Model):
@@ -15,6 +19,9 @@ class Birthday(models.Model):
     # Валидатор указывается в описании поля модели, если форма на основе модели.
     birthday = models.DateField('Дата рождения', validators=(real_age,))
     image = models.ImageField('Фото', upload_to='birthdays_images', blank=True)
+    author = models.ForeignKey(
+        User, verbose_name='Автор записи', on_delete=models.CASCADE, null=True
+    )
 
     class Meta:
         constraints = (

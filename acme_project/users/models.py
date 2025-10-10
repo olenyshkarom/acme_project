@@ -3,5 +3,6 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    birthday = models.DateField(null=True)
+    # birthday = models.DateField(null=True)
     # bio = models.TextField(null=True)
+    pass
