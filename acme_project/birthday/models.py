@@ -11,6 +11,14 @@ from django.urls import reverse
 User = get_user_model()
 
 
+class Tag(models.Model):
+    tag = models.CharField('Тег', max_length=20)
+
+    # Переопределяем метод:
+    def __str__(self):
+        return self.tag
+
+
 class Birthday(models.Model):
     first_name = models.CharField('Имя', max_length=20)
     last_name = models.CharField(
@@ -21,6 +29,12 @@ class Birthday(models.Model):
     image = models.ImageField('Фото', upload_to='birthdays_images', blank=True)
     author = models.ForeignKey(
         User, verbose_name='Автор записи', on_delete=models.CASCADE, null=True
+    )
+    tags = models.ManyToManyField(
+        Tag,
+        verbose_name='Теги',
+        blank=True,
+        help_text='Удерживайте Ctrl для выбора нескольких вариантов'
     )
 
     class Meta:
@@ -51,7 +65,6 @@ class Congratulation(models.Model):
 
     class Meta:
         ordering = ('created_at',)
-
 
 
 # from django.db import models
